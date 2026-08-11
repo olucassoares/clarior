@@ -51,4 +51,12 @@ body{background:radial-gradient(circle at 100% 0,#eee8d8 0,transparent 26%),var(
 .content{padding-top:28px}
 @media(max-width:1000px){.sidebar{padding:0 18px}.brand{margin-right:14px}.sidebar nav button{padding:0 10px;font-size:11px}.sidebar nav button.active:after{right:9px;left:9px}.profile span{display:none}.profile{padding-left:12px}.topbar{padding-right:20px;padding-left:20px}}
 @media(max-width:700px){.sidebar{height:64px;padding:0 12px}.brand{margin-right:6px;font-size:0}.brand>span{width:34px;height:34px}.sidebar nav{min-width:0;flex:1;justify-content:center}.sidebar nav button{justify-content:center;min-width:48px;padding:0 9px;font-size:0}.sidebar nav small{display:none}.sidebar nav button.active:after{right:8px;left:8px}.profile{height:34px;margin-left:4px;padding-left:8px}.profile>b{width:32px;height:32px}.topbar{top:64px}}
+
+/* Legibility and route states */
+.welcome p,.section-title p{font-size:12px}.welcome span,.section-title span,.topbar input,.welcome select{font-size:14px}
+.metrics header,.metrics p,.panel header p,.report-grid small,.report-grid p,.settings span,.transaction,.modal label{font-size:13px}
+.plan small{font-size:11px}.plan span,.ring span,.budget>p,.transaction small,.transaction time,.transaction button{font-size:12px}
+.route-state{min-height:100vh;display:grid;place-items:center;padding:24px;background:var(--canvas);color:var(--ink)}
+.route-state>div{max-width:520px;padding:30px;border:1px solid var(--line);border-radius:16px;background:#fff;text-align:center;box-shadow:0 16px 40px #173b3020}
+.route-state h1{margin:0 0 10px}.route-state p{color:var(--muted);line-height:1.6}.route-state a{display:inline-flex;margin-top:12px;padding:10px 14px;border-radius:9px;background:var(--green);color:#fff;text-decoration:none;font-weight:800}
 .metrics article,.panel,.report-grid article,.settings{box-shadow:0 4px 18px #143e3210}
