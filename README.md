@@ -2,6 +2,8 @@
 
 Aplicação full stack de gestão financeira pessoal. O projeto transforma movimentações em uma visão clara de saldo, orçamento e hábitos, com persistência real, isolamento por usuário, relatórios e exportação segura.
 
+**Aplicação em produção:** [Abrir Clarior](https://clarior-rho.vercel.app)
+
 ![Painel financeiro do Clarior](public/screenshots/dashboard.jpg)
 
 ## Contexto do produto
