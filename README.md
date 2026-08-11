@@ -1,10 +1,24 @@
 # Clarior
 
-Aplicação full stack de gestão financeira pessoal. O projeto transforma movimentações em uma visão clara de saldo, orçamento e hábitos, com persistência real, isolamento por usuário, relatórios e exportação segura.
+> Controle financeiro pessoal com orçamento, relatórios e persistência real.
 
-**Aplicação em produção:** [Abrir Clarior](https://clarior-rho.vercel.app)
+[![Aplicação](https://img.shields.io/badge/demo-online-147d64?style=flat-square)](https://clarior-rho.vercel.app)
+[![CI](https://img.shields.io/github/actions/workflow/status/olucassoares/clarior/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/olucassoares/clarior/actions/workflows/ci.yml)
+![Next.js](https://img.shields.io/badge/Next.js-16-111111?style=flat-square)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178c6?style=flat-square)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Neon-336791?style=flat-square)
 
-![Painel financeiro do Clarior](public/screenshots/dashboard.jpg)
+Aplicação full stack que transforma movimentações em uma visão clara de saldo, orçamento e hábitos, com isolamento por usuário, regras financeiras no servidor, relatórios e exportação segura.
+
+**[Abrir aplicação](https://clarior-rho.vercel.app)** · **[Arquitetura](docs/ARCHITECTURE.md)** · **[API](docs/API.md)** · **[Segurança](docs/SECURITY.md)**
+
+## Avaliação rápida
+
+1. Confira saldo, orçamento e distribuição de despesas no dashboard.
+2. Cadastre uma receita ou despesa e observe os indicadores recalculados.
+3. Pesquise o histórico, abra os relatórios e teste a exportação CSV.
+
+O principal ponto técnico é a consistência financeira: valores em centavos, validação no servidor, idempotência e isolamento dos registros pelo usuário.
 
 ## Contexto do produto
 

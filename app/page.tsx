@@ -47,7 +47,18 @@ export default function Home() {
     setData(await response.json() as Dashboard);
     setNotice("Ambiente demonstrativo · valores recalculados a cada lançamento.");
   }
-  useEffect(() => { load().catch(() => setNotice("Os últimos dados continuam disponíveis.")); }, []);
+  useEffect(() => {
+    fetch("/api/dashboard", { cache: "no-store" })
+      .then(async (response) => {
+        if (!response.ok) throw new Error("Não foi possível sincronizar os dados.");
+        return response.json() as Promise<Dashboard>;
+      })
+      .then((dashboard) => {
+        setData(dashboard);
+        setNotice("Ambiente demonstrativo · valores recalculados a cada lançamento.");
+      })
+      .catch(() => setNotice("Os últimos dados continuam disponíveis."));
+  }, []);
   useEffect(() => {
     const shortcut = (event: KeyboardEvent) => { if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") { event.preventDefault(); searchRef.current?.focus(); } };
     window.addEventListener("keydown", shortcut); return () => window.removeEventListener("keydown", shortcut);
