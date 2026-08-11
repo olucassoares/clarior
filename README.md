@@ -14,7 +14,7 @@ Aplicação full stack que transforma movimentações em uma visão clara de sal
 
 ## Avaliação rápida
 
-1. Confira saldo, orçamento e distribuição de despesas no dashboard.
+1. Alterne entre mês atual, 30 e 90 dias e confira como o período recalcula o painel.
 2. Cadastre uma receita ou despesa e observe os indicadores recalculados.
 3. Pesquise o histórico, abra os relatórios e teste a exportação CSV.
 
@@ -31,6 +31,7 @@ Planilhas financeiras exigem trabalho manual e tornam difícil responder pergunt
 ## Funcionalidades
 
 - Dashboard com saldo, receitas, despesas e taxa de economia.
+- Filtro real de período para mês atual, últimos 30 e últimos 90 dias.
 - Cadastro de receitas e despesas com validação no servidor.
 - Histórico persistente e pesquisa instantânea.
 - Exclusão protegida por propriedade do registro.
@@ -91,7 +92,7 @@ npm run typecheck
 npm run build
 ```
 
-A suíte verifica conversão monetária, percentuais, taxa de economia, validação de transações, proteção do CSV e resposta das principais rotas. O teste de navegador registra uma despesa e confirma a persistência após recarregar.
+A suíte verifica conversão monetária, percentuais, taxa de economia, validação de transações, proteção do CSV e resposta das principais rotas. O teste de navegador registra uma despesa e confirma a persistência após recarregar. No CI, um PostgreSQL temporário isola o fluxo E2E de cada execução.
 
 ## Decisões importantes
 

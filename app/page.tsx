@@ -33,6 +33,7 @@ function Icon({ name }: { name: string }) {
 export default function Home() {
   const [data, setData] = useState(fallback);
   const [active, setActive] = useState("Visão geral");
+  const [period, setPeriod] = useState<"month" | "30" | "90">("month");
   const [search, setSearch] = useState("");
   const [visible, setVisible] = useState(true);
   const [modal, setModal] = useState(false);
@@ -42,13 +43,13 @@ export default function Home() {
   const searchRef = useRef<HTMLInputElement>(null);
 
   async function load() {
-    const response = await fetch("/api/dashboard", { cache: "no-store" });
+    const response = await fetch(`/api/dashboard?period=${period}`, { cache: "no-store" });
     if (!response.ok) throw new Error("Não foi possível sincronizar os dados.");
     setData(await response.json() as Dashboard);
     setNotice("Ambiente demonstrativo · valores recalculados a cada lançamento.");
   }
   useEffect(() => {
-    fetch("/api/dashboard", { cache: "no-store" })
+    fetch(`/api/dashboard?period=${period}`, { cache: "no-store" })
       .then(async (response) => {
         if (!response.ok) throw new Error("Não foi possível sincronizar os dados.");
         return response.json() as Promise<Dashboard>;
@@ -58,7 +59,7 @@ export default function Home() {
         setNotice("Ambiente demonstrativo · valores recalculados a cada lançamento.");
       })
       .catch(() => setNotice("Os últimos dados continuam disponíveis."));
-  }, []);
+  }, [period]);
   useEffect(() => {
     const shortcut = (event: KeyboardEvent) => { if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") { event.preventDefault(); searchRef.current?.focus(); } };
     window.addEventListener("keydown", shortcut); return () => window.removeEventListener("keydown", shortcut);
@@ -92,7 +93,7 @@ export default function Home() {
       <header className="topbar"><label><Icon name="search"/><input ref={searchRef} value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Buscar transações..."/><kbd>⌘ K</kbd></label><button className="primary" onClick={() => setModal(true)}><Icon name="plus"/>Nova transação</button></header>
       <div className="content">
         {active === "Visão geral" && <>
-          <section className="welcome"><div><p>AGOSTO · VISÃO MENSAL</p><h1>Seu mês, sem adivinhação.</h1><span>{data.summary.savingsRate}% da renda permanece disponível depois dos gastos.</span></div><select aria-label="Período"><option>Este mês</option><option>Últimos 30 dias</option><option>Últimos 90 dias</option></select></section>
+          <section className="welcome"><div><p>{period === "month" ? "AGOSTO · VISÃO MENSAL" : `MOVIMENTAÇÕES · ÚLTIMOS ${period} DIAS`}</p><h1>{period === "month" ? "Seu mês, sem adivinhação." : "Seu dinheiro ao longo do tempo."}</h1><span>{data.summary.savingsRate}% da renda do período permanece disponível depois dos gastos.</span></div><select aria-label="Período" value={period} onChange={(event) => setPeriod(event.target.value as "month" | "30" | "90")}><option value="month">Este mês</option><option value="30">Últimos 30 dias</option><option value="90">Últimos 90 dias</option></select></section>
           <div className="notice"><span>{notice}</span><button onClick={() => load()}>Atualizar</button></div>
           <section className="metrics">
             <article className="balance"><header>Saldo do período <button onClick={() => setVisible(!visible)}><Icon name="eye"/></button></header><strong>{money(data.summary.balanceCents)}</strong><p>Receitas menos despesas registradas</p></article>
@@ -114,5 +115,5 @@ export default function Home() {
 }
 
 function Transactions({ items, money, remove }: { items: Transaction[]; money: (cents: number) => string; remove: (id: string) => void }) {
-  return <article className="panel transactions"><header><div><h2>Transações recentes</h2><p>Movimentações salvas no banco</p></div></header>{items.length ? items.map((item) => <div className="transaction" key={item.id}><i>{item.description.slice(0,1).toUpperCase()}</i><span><strong>{item.description}</strong><small>{item.category_name}</small></span><time>{new Date(`${item.occurred_at}T12:00:00`).toLocaleDateString("pt-BR", { day:"2-digit", month:"short" })}</time><b className={item.type}>{item.type === "income" ? "+" : "-"}{money(item.amount_cents)}</b><button onClick={() => remove(item.id)}>Excluir</button></div>) : <p className="empty">Nenhuma transação encontrada.</p>}</article>;
+  return <article className="panel transactions"><header><div><h2>Transações recentes</h2><p>Movimentações salvas no banco</p></div></header>{items.length ? items.map((item) => <div className="transaction" key={item.id}><i>{item.description.slice(0,1).toUpperCase()}</i><span><strong>{item.description}</strong><small>{item.category_name}</small></span><time>{new Date(`${item.occurred_at}T12:00:00`).toLocaleDateString("pt-BR", { day:"2-digit", month:"short" })}</time><b className={item.type}>{item.type === "income" ? "+" : "-"}{money(item.amount_cents)}</b><button aria-label={`Excluir ${item.description}`} onClick={() => remove(item.id)}>Excluir</button></div>) : <p className="empty">Nenhuma transação encontrada.</p>}</article>;
 }
