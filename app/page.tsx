@@ -83,11 +83,11 @@ export default function Home() {
 
   const nav = [{ label: "Visão geral", icon: "home" }, { label: "Transações", icon: "swap" }, { label: "Relatórios", icon: "chart" }, { label: "Configurações", icon: "settings" }];
   return <main className="app-shell">
-    <aside className="sidebar">
+    <header className="sidebar">
       <div className="brand"><span><ClariorMark/></span>Clarior</div>
-      <nav>{nav.map((item) => <button key={item.label} className={active === item.label ? "active" : ""} onClick={() => setActive(item.label)}><Icon name={item.icon}/>{item.label}{item.label === "Transações" && <small>{data.transactions.length}</small>}</button>)}</nav>
+      <nav aria-label="Navegação principal">{nav.map((item) => <button key={item.label} className={active === item.label ? "active" : ""} onClick={() => setActive(item.label)}><Icon name={item.icon}/>{item.label}{item.label === "Transações" && <small>{data.transactions.length}</small>}</button>)}</nav>
       <div className="profile"><b>LS</b><span><strong>Lucas Soares</strong><small>Ambiente demonstrativo</small></span></div>
-    </aside>
+    </header>
     <section className="workspace">
       <header className="topbar"><label><Icon name="search"/><input ref={searchRef} value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Buscar transações..."/><kbd>⌘ K</kbd></label><button className="primary" onClick={() => setModal(true)}><Icon name="plus"/>Nova transação</button></header>
       <div className="content">

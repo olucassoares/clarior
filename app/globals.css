@@ -32,4 +32,23 @@ body{background:radial-gradient(circle at 100% 0,#eee8d8 0,transparent 26%),var(
 .modal{background:#0e352d99}
 .modal header p{color:#8b7137}
 .topbar label{background:#fbfcf9;border-color:#dde4df}
+
+/* Navegação superior inspirada em produtos financeiros brasileiros. */
+.app-shell{display:block}
+.sidebar{position:sticky;inset:auto;top:0;width:100%;height:72px;padding:0 clamp(20px,4vw,58px);display:flex;flex-direction:row;align-items:center;border-right:0;border-bottom:1px solid #285d50;box-shadow:0 5px 20px #102f281c;z-index:30}
+.brand{flex:0 0 auto;margin-right:clamp(22px,3vw,48px);padding:0;color:#fff;font-size:20px}
+.brand>span{width:32px;height:32px}
+.sidebar nav{align-self:stretch;display:flex;align-items:stretch;gap:2px}
+.sidebar nav button{position:relative;height:100%;padding:0 15px;border-radius:0;color:#bfd1cb;white-space:nowrap}
+.sidebar nav button:hover{background:#ffffff0a;color:#fff}
+.sidebar nav button.active{background:transparent;color:#fff;box-shadow:none}
+.sidebar nav button.active:after{content:"";position:absolute;right:14px;bottom:0;left:14px;height:3px;border-radius:3px 3px 0 0;background:#c3a866}
+.sidebar nav small{margin-left:2px;background:#2c6658;color:#f1f6f3}
+.profile{height:42px;margin:0 0 0 auto;padding:0 0 0 20px;border-top:0;border-left:1px solid #2b5f52}
+.profile>b{border-radius:50%}
+.workspace{grid-column:auto}
+.topbar{top:72px;height:64px;padding-right:clamp(20px,4vw,58px);padding-left:clamp(20px,4vw,58px)}
+.content{padding-top:28px}
+@media(max-width:1000px){.sidebar{padding:0 18px}.brand{margin-right:14px}.sidebar nav button{padding:0 10px;font-size:11px}.sidebar nav button.active:after{right:9px;left:9px}.profile span{display:none}.profile{padding-left:12px}.topbar{padding-right:20px;padding-left:20px}}
+@media(max-width:700px){.sidebar{height:64px;padding:0 12px}.brand{margin-right:6px;font-size:0}.brand>span{width:34px;height:34px}.sidebar nav{min-width:0;flex:1;justify-content:center}.sidebar nav button{justify-content:center;min-width:48px;padding:0 9px;font-size:0}.sidebar nav small{display:none}.sidebar nav button.active:after{right:8px;left:8px}.profile{height:34px;margin-left:4px;padding-left:8px}.profile>b{width:32px;height:32px}.topbar{top:64px}}
 .metrics article,.panel,.report-grid article,.settings{box-shadow:0 4px 18px #143e3210}
